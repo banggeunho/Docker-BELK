@@ -13,7 +13,7 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - type: volume
-        source: elasticsearch/data
+        source: elasticsearch
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -73,12 +73,13 @@ services:
       context: filebeat/
       args:
         ELK_VERSION: $ELK_VERSION
+    command: filebeat -e -strict.perms=false
     volumes:
       - type: bind
         source: ./filebeat/config/filebeat.yml
         target: /usr/share/filebeat/filebeat.yml
         read_only: true
-      - ../logs:/usr/share/filebeat/logs
+      - ../nfs-mount/msa/logs:/usr/share/filebeat/logs
     ports:
       - "9999:9999"
     depends_on:
