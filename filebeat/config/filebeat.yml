@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /usr/share/filebeat/logs/accounts/*.log
+      - /usr/share/filebeat/logs/discovery/*.log
+      - /usr/share/filebeat/logs/gateway/*.log
+      - /usr/share/filebeat/logs/main/*.log
+      - /usr/share/filebeat/logs/orders/*.log
+      - /usr/share/filebeat/logs/products/*.log
+      - /usr/share/filebeat/logs/zipkin/*.log
+
+
+
+output.logstash:
+  hosts: ["logstash:5044"]
